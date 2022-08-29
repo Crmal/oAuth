@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  nest:
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mysql
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - LAUNCH_ENV=docker-compose
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
